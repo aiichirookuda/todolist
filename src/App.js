@@ -1,25 +1,50 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
-function App() {
+export const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {/* header */}
+      <div className='logo'>Logo</div>
+      <div className='main-wrapper'>
+        <div className='left-container'>
+          {/* category */}
+          <div className='category'>
+            <p>work</p>
+            <p>life</p>
+            <p>+</p>
+          </div>
+          {/* input */}
+          <form>
+            <input placeholder='Please add new TODO'/>
+          </form>
+          {/* todo */}
+          <div className='todo'>
+            <ul className='box'>
+              <li>title</li>
+              <li>details</li>
+              <li>deadline</li>
+            </ul>
+          </div>
+        </div>
+        <div className='right-container'>
+          {/* done */}
+          <div className='done'>
+            <p>done</p>
+            <div className='space'></div>
+            <ul className='box'>
+              <li>title</li>
+              <li>details</li>
+              <li>completion day</li>
+            </ul>
+            <ul className='box'>
+              <li>title</li>
+              <li>details</li>
+              <li>completion day</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
-
-export default App;
