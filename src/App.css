@@ -62,3 +62,21 @@ input {
 .done .box {
   background-color: rgba(0, 0, 255, 0.355);
 }
+
+.modal {
+  width: 60%;
+  height: 300px;
+  border: 1px solid black;
+  padding: 10px;
+}
+
+textarea {
+  width: 100%;
+  height:100px;
+}
+
+button {
+  width: 100px;
+  height: 30px;
+  margin: 15px;
+}
