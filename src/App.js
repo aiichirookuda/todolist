@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
+import { TodoModal } from './components/TodoModal';
 
 export const App = () => {
   const [todoText, setTodoText] = useState('');
@@ -20,8 +21,10 @@ export const App = () => {
     const newTodo = [...incompleteTodo, { title: todoText, details: '', deadline: '' }];
     setIncompleteTodo(newTodo);
     setTodoText('');
-    console.log(incompleteTodo);
   };
+
+  const [modal, setModal] = useState('');
+  const onClickModalOpen = () => setModal(<TodoModal />);
 
   return (
     <>
@@ -43,14 +46,14 @@ export const App = () => {
 
           {/* input */}
           <form onSubmit={onSubmitAdd}>
-            <input placeholder='Please add new TODO' value={todoText} onChange={onChangeTodoText} />
+            <input className='input-todo' placeholder='Please add new TODO' value={todoText} onChange={onChangeTodoText} />
           </form>
 
           {/* todo */}
           <div className='todo'>
             {incompleteTodo.map((todo, index) => {
               return (
-                <ul key={index} className='box'>
+                <ul key={index} className='box' onClick={onClickModalOpen}>
                   <li>{todo.title}</li>
                   <li>{todo.details}</li>
                   <li>{todo.deadline}</li>
@@ -77,17 +80,7 @@ export const App = () => {
           </div>
         </div>
       </div>
-
-      {/* todo-modal */}
-      <div className='modal'>
-        <p>title</p>
-        <p>details</p>
-        <textarea />
-        <p>deadline</p>
-        <input type='date' />
-        <button>complete</button>
-        <button>delete</button>
-      </div>
+      {modal}
     </>
   );
 }
