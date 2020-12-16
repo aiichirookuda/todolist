@@ -4,15 +4,16 @@ import { TodoModal } from './components/TodoModal';
 
 export const App = () => {
   const [todoText, setTodoText] = useState('');
-  const [category, setCategory] = useState(['work', 'private']);
+  const [category, /*setCategory*/] = useState(['work', 'private']);
   const [incompleteTodo, setIncompleteTodo] = useState([
-    { title: 'todo1', details: 'details1', deadline: '2020/12/14' },
-    { title: 'todo2', details: 'details2', deadline: '2020/12/30' }
+    { title: 'todoリストアプリ作成', details: 'Reactで作る', deadline: '2020-12-14' },
+    { title: 'todoリストアプリ改良', details: 'コンポーネント化', deadline: '2020-12-30' }
   ]);
   const [completeTodo, setCompleteTodo] = useState([
     { title: 'todo3', details: 'details3', completionDay: '2020/12/1' },
     { title: 'todo4', details: 'details4', completionDay: '2020/12/5' }
   ]);
+  const [modal, setModal] = useState('');
 
   const onChangeTodoText = (event) => setTodoText(event.target.value);
 
@@ -23,8 +24,16 @@ export const App = () => {
     setTodoText('');
   };
 
-  const [modal, setModal] = useState('');
-  const onClickModalOpen = () => setModal(<TodoModal />);
+  const modalOpen = (index) => {
+    setModal(
+      <TodoModal
+        title={incompleteTodo[index].title}
+        details={incompleteTodo[index].details}
+        deadline={incompleteTodo[index].deadline}
+        modalClose={()=>setModal('')}
+      />
+    );
+  };
 
   return (
     <>
@@ -53,7 +62,7 @@ export const App = () => {
           <div className='todo'>
             {incompleteTodo.map((todo, index) => {
               return (
-                <ul key={index} className='box' onClick={onClickModalOpen}>
+                <ul key={index} className='box' onClick={() => modalOpen(index)}>
                   <li>{todo.title}</li>
                   <li>{todo.details}</li>
                   <li>{todo.deadline}</li>
@@ -80,6 +89,7 @@ export const App = () => {
           </div>
         </div>
       </div>
+
       {modal}
     </>
   );
