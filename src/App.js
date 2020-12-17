@@ -10,8 +10,8 @@ export const App = () => {
     { title: 'todoリストアプリ改良', details: 'コンポーネント化', deadline: '2020-12-30' }
   ]);
   const [completeTodo, setCompleteTodo] = useState([
-    { title: 'todo3', details: 'details3', completionDay: '2020/12/1' },
-    { title: 'todo4', details: 'details4', completionDay: '2020/12/5' }
+    { title: 'todo3', details: 'details3', completionDate: '2020/12/1' },
+    { title: 'todo4', details: 'details4', completionDate: '2020/12/5' }
   ]);
   const [modal, setModal] = useState('');
 
@@ -24,13 +24,41 @@ export const App = () => {
     setTodoText('');
   };
 
+  const onClickDelete = (index) => {
+    const newTodo = [...incompleteTodo];
+    newTodo.splice(index, 1);
+    setIncompleteTodo(newTodo);
+    setModal('');
+  };
+
+  const onClickComplete = (index) => {
+    const now = new Date();
+    const getCompletionDate = () =>{
+      const year = now.getFullYear();
+      const month = now.getMonth() + 1;
+      const date = now.getDate();
+      const today = `${year}-${month}-${date}`;
+      incompleteTodo[index].completionDate = today;
+    };
+    getCompletionDate();
+
+    const newIncompleteTodo = [...incompleteTodo];
+    newIncompleteTodo.splice(index, 1);
+    const newCompleteTodo = [...completeTodo, incompleteTodo[index]];
+    setIncompleteTodo(newIncompleteTodo);
+    setCompleteTodo(newCompleteTodo);
+    setModal('');
+  };
+
   const modalOpen = (index) => {
     setModal(
       <TodoModal
         title={incompleteTodo[index].title}
         details={incompleteTodo[index].details}
         deadline={incompleteTodo[index].deadline}
-        modalClose={()=>setModal('')}
+        modalClose={() => setModal('')}
+        todoDelete={() => onClickDelete(index)}
+        todoComplete={() => onClickComplete(index)}
       />
     );
   };
@@ -82,7 +110,7 @@ export const App = () => {
                 <ul key={index} className='box'>
                   <li>{todo.title}</li>
                   <li>{todo.details}</li>
-                  <li>{todo.completionDay}</li>
+                  <li>{todo.completionDate}</li>
                 </ul>
               );
             })}
