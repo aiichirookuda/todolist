@@ -4,22 +4,24 @@ import { TodoModal } from './components/TodoModal';
 
 export const App = () => {
   const [todoText, setTodoText] = useState('');
+  const [detailsText, setDetailsText] = useState('');
   const [category, /*setCategory*/] = useState(['work', 'private']);
   const [incompleteTodo, setIncompleteTodo] = useState([
-    { title: 'todoリストアプリ作成', details: 'Reactで作る', deadline: '2020-12-14' },
-    { title: 'todoリストアプリ改良', details: 'コンポーネント化', deadline: '2020-12-30' }
+    { title: 'todo1', details: 'details1', deadline: '2020-11-10' },
+    { title: 'todo2', details: 'details2', deadline: '2020-11-25' }
   ]);
   const [completeTodo, setCompleteTodo] = useState([
-    { title: 'todo3', details: 'details3', completionDate: '2020/12/1' },
-    { title: 'todo4', details: 'details4', completionDate: '2020/12/5' }
+    { title: 'todo3', details: 'details3', completionDate: '2020-12-1' },
+    { title: 'todo4', details: 'details4', completionDate: '2020-12-5' }
   ]);
-  const [modal, setModal] = useState('');
 
-  const onChangeTodoText = (event) => setTodoText(event.target.value);
+  // todo追加
+  const onChangeTodoText = (e) => setTodoText(e.target.value);
 
-  const onSubmitAdd = (event) => {
-    event.preventDefault();
-    const newTodo = [...incompleteTodo, { title: todoText, details: '', deadline: '' }];
+  const onSubmitAdd = (e) => {
+    e.preventDefault();
+    if (todoText === '') return;
+    const newTodo = [...incompleteTodo, { title: todoText }];
     setIncompleteTodo(newTodo);
     setTodoText('');
   };
@@ -28,12 +30,12 @@ export const App = () => {
     const newTodo = [...incompleteTodo];
     newTodo.splice(index, 1);
     setIncompleteTodo(newTodo);
-    setModal('');
+    setIsOpen(false);
   };
 
   const onClickComplete = (index) => {
     const now = new Date();
-    const getCompletionDate = () =>{
+    const getCompletionDate = () => {
       const year = now.getFullYear();
       const month = now.getMonth() + 1;
       const date = now.getDate();
@@ -47,21 +49,16 @@ export const App = () => {
     const newCompleteTodo = [...completeTodo, incompleteTodo[index]];
     setIncompleteTodo(newIncompleteTodo);
     setCompleteTodo(newCompleteTodo);
-    setModal('');
+    setIsOpen(false);
   };
 
-  const modalOpen = (index) => {
-    setModal(
-      <TodoModal
-        title={incompleteTodo[index].title}
-        details={incompleteTodo[index].details}
-        deadline={incompleteTodo[index].deadline}
-        modalClose={() => setModal('')}
-        todoDelete={() => onClickDelete(index)}
-        todoComplete={() => onClickComplete(index)}
-      />
-    );
-  };
+  //modal
+  const [isOpen, setIsOpen] = useState(false);
+  const onClickModalOpen = () => setIsOpen(true);
+  const onClickModalClose = () => setIsOpen(false);
+
+
+  const onChangeDetailsText = (e) => setDetailsText(e.target.value);
 
   return (
     <>
@@ -90,11 +87,24 @@ export const App = () => {
           <div className='todo'>
             {incompleteTodo.map((todo, index) => {
               return (
-                <ul key={index} className='box' onClick={() => modalOpen(index)}>
-                  <li>{todo.title}</li>
-                  <li>{todo.details}</li>
-                  <li>{todo.deadline}</li>
-                </ul>
+                <div key={index}>
+                  <ul className='box' onClick={onClickModalOpen}>
+                    <li>{todo.title}</li>
+                    <li>{todo.details}</li>
+                    <li>{todo.deadline}</li>
+                  </ul>
+                  <TodoModal
+                    isOpen={isOpen}
+                    title={incompleteTodo[index].title}
+                    details={incompleteTodo[index].details}
+                    deadline={incompleteTodo[index].deadline}
+                    detailsText={detailsText}
+                    onChangeDetailsText={onChangeDetailsText}
+                    onClickDelete={onClickDelete}
+                    onClickComplete={() => onClickComplete(index)}
+                    closeModal={onClickModalClose}
+                  />
+                </div>
               );
             })}
           </div>
@@ -117,8 +127,6 @@ export const App = () => {
           </div>
         </div>
       </div>
-
-      {modal}
     </>
   );
 }

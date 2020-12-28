@@ -2,23 +2,26 @@ import React from 'react';
 
 export const TodoModal = (props) => {
 
-  const { title, details, deadline, modalClose, todoDelete, todoComplete } = props;
-
-  
+  const { title, detailsText, onClickDelete, onClickComplete, onChangeDetailsText, isOpen,
+    closeModal } = props;
 
   return (
     <>
-      <div className='modal'>
-        <p>{title}</p>
-        <p>details</p>
-        <textarea className='details' defaultValue={details} />
-        <p>deadline</p>
-        <input className='deadline' type='date' defaultValue={deadline} />
-        <button onClick={todoComplete}>complete</button>
-        <button onClick={todoDelete}>delete</button>
-        <button onClick={modalClose}>close</button>
-      </div>
-      <div className='background'></div>
+      {isOpen &&
+        <div>
+          <div className='modal'>
+            <p>{title}</p>
+            <p>details</p>
+            <textarea className='details' value={detailsText} onChange={onChangeDetailsText} />
+            <p>deadline</p>
+            <input className='deadline' type='date' />
+            <button onClick={onClickComplete}>complete</button>
+            <button onClick={onClickDelete}>delete</button>
+            <button onClick={closeModal}>close</button>
+          </div>
+          <div className='background'></div>
+        </div>
+      }
     </>
   );
 }
