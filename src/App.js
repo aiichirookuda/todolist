@@ -8,11 +8,12 @@ export const App = () => {
   const [category, /*setCategory*/] = useState(['work', 'private']);
   const [incompleteTodo, setIncompleteTodo] = useState([
     { title: 'todo1', details: 'details1', deadline: '2020-11-10' },
-    { title: 'todo2', details: 'details2', deadline: '2020-11-25' }
+    { title: 'todo2', details: 'details2', deadline: '2020-11-25' },
+    { title: 'todo3', details: 'details3', deadline: '2020-11-25' }
   ]);
   const [completeTodo, setCompleteTodo] = useState([
-    { title: 'todo3', details: 'details3', completionDate: '2020-12-1' },
-    { title: 'todo4', details: 'details4', completionDate: '2020-12-5' }
+    { title: 'todo4', details: 'details4', completionDate: '2020-12-1' },
+    { title: 'todo5', details: 'details5', completionDate: '2020-12-5' }
   ]);
 
   // todo追加
@@ -30,7 +31,6 @@ export const App = () => {
     const newTodo = [...incompleteTodo];
     newTodo.splice(index, 1);
     setIncompleteTodo(newTodo);
-    setIsOpen(false);
   };
 
   const onClickComplete = (index) => {
@@ -49,14 +49,7 @@ export const App = () => {
     const newCompleteTodo = [...completeTodo, incompleteTodo[index]];
     setIncompleteTodo(newIncompleteTodo);
     setCompleteTodo(newCompleteTodo);
-    setIsOpen(false);
   };
-
-  //modal
-  const [isOpen, setIsOpen] = useState(false);
-  const onClickModalOpen = () => setIsOpen(true);
-  const onClickModalClose = () => setIsOpen(false);
-
 
   const onChangeDetailsText = (e) => setDetailsText(e.target.value);
 
@@ -88,21 +81,14 @@ export const App = () => {
             {incompleteTodo.map((todo, index) => {
               return (
                 <div key={index}>
-                  <ul className='box' onClick={onClickModalOpen}>
-                    <li>{todo.title}</li>
-                    <li>{todo.details}</li>
-                    <li>{todo.deadline}</li>
-                  </ul>
                   <TodoModal
-                    isOpen={isOpen}
-                    title={incompleteTodo[index].title}
-                    details={incompleteTodo[index].details}
-                    deadline={incompleteTodo[index].deadline}
+                    title={todo.title}
+                    details={todo.details}
+                    deadline={todo.deadline}
                     detailsText={detailsText}
                     onChangeDetailsText={onChangeDetailsText}
-                    onClickDelete={onClickDelete}
+                    onClickDelete={() => onClickDelete(index)}
                     onClickComplete={() => onClickComplete(index)}
-                    closeModal={onClickModalClose}
                   />
                 </div>
               );

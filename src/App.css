@@ -91,7 +91,7 @@ button {
   flex-direction: row;
 }
 
-/* .background{
+.background{
   position: fixed;
   top: 0px;
   left: 0px;
@@ -99,5 +99,5 @@ button {
   min-height: 100vh;
   background-color: rgba(0, 0, 0, 0.466);
   z-index: 5;
-} */
+}
 /* modal ここまで */
