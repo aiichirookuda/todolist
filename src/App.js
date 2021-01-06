@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import './App.css';
-import { TodoModal } from './components/TodoModal';
+import { Todo } from './components/Todo';
+import { Done } from './components/Done';
 
 export const App = () => {
-  const [todoText, setTodoText] = useState('');
-  const [detailsText, setDetailsText] = useState('');
   const [category, /*setCategory*/] = useState(['work', 'private']);
   const [incompleteTodo, setIncompleteTodo] = useState([
     { title: 'todo1', details: 'details1', deadline: '2020-11-10' },
@@ -16,9 +15,9 @@ export const App = () => {
     { title: 'todo5', details: 'details5', completionDate: '2020-12-5' }
   ]);
 
-  // todo追加
+  // TODO追加
+  const [todoText, setTodoText] = useState('');
   const onChangeTodoText = (e) => setTodoText(e.target.value);
-
   const onSubmitAdd = (e) => {
     e.preventDefault();
     if (todoText === '') return;
@@ -27,12 +26,14 @@ export const App = () => {
     setTodoText('');
   };
 
+  // TODO削除
   const onClickDelete = (index) => {
     const newTodo = [...incompleteTodo];
     newTodo.splice(index, 1);
     setIncompleteTodo(newTodo);
   };
 
+  // TODO完了
   const onClickComplete = (index) => {
     const now = new Date();
     const getCompletionDate = () => {
@@ -51,7 +52,20 @@ export const App = () => {
     setCompleteTodo(newCompleteTodo);
   };
 
+  // TODOの説明関連
+  const [detailsText, setDetailsText] = useState('');
   const onChangeDetailsText = (e) => setDetailsText(e.target.value);
+
+  // DONE戻す
+  const onClickReturn = (index) => {
+    console.log(completeTodo[index]);
+    const newCompleteTodo = [...completeTodo];
+    newCompleteTodo.splice(index, 1);
+    setCompleteTodo(newCompleteTodo);
+
+    const newTodo = [...incompleteTodo, completeTodo[index]];
+    setIncompleteTodo(newTodo);
+  }
 
   return (
     <>
@@ -81,7 +95,7 @@ export const App = () => {
             {incompleteTodo.map((todo, index) => {
               return (
                 <div key={index}>
-                  <TodoModal
+                  <Todo
                     title={todo.title}
                     details={todo.details}
                     deadline={todo.deadline}
@@ -103,11 +117,12 @@ export const App = () => {
             <div className='space'></div>
             {completeTodo.map((todo, index) => {
               return (
-                <ul key={index} className='box'>
-                  <li>{todo.title}</li>
-                  <li>{todo.details}</li>
-                  <li>{todo.completionDate}</li>
-                </ul>
+                <Done key={index}
+                  title={todo.title}
+                  details={todo.details}
+                  completionDate={todo.completionDate}
+                  onClickReturn={()=>onClickReturn(index)}
+                />
               );
             })}
           </div>

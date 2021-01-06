@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export const TodoModal = (props) => {
+export const Todo = (props) => {
 
   const { title, details, deadline, detailsText, onClickDelete, onClickComplete, onChangeDetailsText } = props;
 
@@ -12,9 +12,9 @@ export const TodoModal = (props) => {
 
   let modal;
   if (isOpen) {
-    modal = (
+    modal =
       <>
-        <div className='modal'>
+        <div className='todo-modal'>
           <p>{title}</p>
           <p>details</p>
           <textarea className='details' value={detailsText} onChange={onChangeDetailsText} />
@@ -26,18 +26,17 @@ export const TodoModal = (props) => {
         </div>
         <div className='background'></div>
       </>
-    );
   }
 
+
   return (
-    <>
-      <ul className='box'
-        onClick={open}>
+    <div className='box'>
+      <ul onClick={open}>
         <li>{title}</li>
         <li>{details}</li>
         <li>{deadline}</li>
       </ul>
       {modal}
-    </>
+    </div>
   );
 }

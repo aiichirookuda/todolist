@@ -64,7 +64,7 @@ body {
 }
 
 /* modal ここから*/
-.modal {
+.todo-modal {
   width: 40%;
   height: 280px;
   padding: 10px;
@@ -73,6 +73,18 @@ body {
   position: fixed;
   top: 35%;
   left: 17%;
+  z-index: 10;
+}
+
+.done-modal {
+  width: 40%;
+  height: 280px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 20px;
+  position: fixed;
+  top: 35%;
+  right: 17%;
   z-index: 10;
 }
 
