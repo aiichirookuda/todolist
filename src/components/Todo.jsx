@@ -6,17 +6,22 @@ export const Todo = (props) => {
     title, details, deadline,
     detailsText, deadlineDate,
     onChangeDetailsText, onChangeDeadlineDate,
-    onClickDelete, onClickComplete, setNewDetails,
-    getDetailsText
+    onClickDelete, onClickComplete, 
+    setNewDetails, setNewDeadline,
+    getDetailsText, getDeadlineDate
   } = props;
 
   const [isOpen, setIsOpen] = useState(false);
   const open = () => {
-    getDetailsText(); setIsOpen(true);
+    getDetailsText(); 
+    getDeadlineDate();
+    setIsOpen(true);
   };
 
   const close = () => {
-    setNewDetails(); setIsOpen(false);
+    setNewDetails();
+    setNewDeadline();
+    setIsOpen(false);
   };
 
   const TodoComplete = () => {

@@ -23,7 +23,7 @@ export const App = () => {
   const onSubmitAdd = (e) => {
     e.preventDefault();
     if (todoText === '') return;
-    const newTodo = [...incompleteTodo, { title: todoText, details: '' }];
+    const newTodo = [...incompleteTodo, { title: todoText, details: '', deadline: '' }];
     setIncompleteTodo(newTodo);
     setTodoText('');
   };
@@ -72,12 +72,27 @@ export const App = () => {
     incompleteTodo[i].details = detailsText;
     const newDetails = [...incompleteTodo];
     setIncompleteTodo(newDetails);
-    setDetailsText('');
   };
 
   // #締め切り関連
   const [deadlineDate, setDeadlineDate] = useState('');
   const onChangeDeadlineDate = (e) => setDeadlineDate(e.target.value);
+
+  // ##締め切り日の取得
+  const getDeadlineDate = (i) => {
+    if (incompleteTodo[i].deadline === '') {
+      setDeadlineDate('');
+    } else {
+      setDeadlineDate(incompleteTodo[i].deadline);
+    }
+  };
+
+  // ##締め切り日の更新
+  const setNewDeadline =(i)=>{
+    incompleteTodo[i].deadline = deadlineDate;
+    const newDeadline = [...incompleteTodo];
+    setIncompleteTodo(newDeadline);
+  };
 
   // #DONE関連
   // ##DONE戻す
@@ -129,7 +144,9 @@ export const App = () => {
                     onClickDelete={() => onClickDelete(i)}
                     onClickComplete={() => onClickComplete(i)}
                     setNewDetails={() => setNewDetails(i)}
+                    setNewDeadline={()=> setNewDeadline(i)}
                     getDetailsText={() => getDetailsText(i)}
+                    getDeadlineDate={() => getDeadlineDate(i)}
                   />
                 </div>
               );
