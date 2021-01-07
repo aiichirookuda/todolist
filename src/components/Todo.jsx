@@ -2,13 +2,30 @@ import React, { useState } from 'react';
 
 export const Todo = (props) => {
 
-  const { title, details, deadline, detailsText, onClickDelete, onClickComplete, onChangeDetailsText } = props;
+  const {
+    title, details, deadline,
+    detailsText, deadlineDate,
+    onChangeDetailsText, onChangeDeadlineDate,
+    onClickDelete, onClickComplete, setNewDetails,
+    getDetailsText
+  } = props;
 
   const [isOpen, setIsOpen] = useState(false);
-  const open = () => setIsOpen(true);
-  const close = () => setIsOpen(false);
-  const TodoComplete = () => { onClickComplete(); close(); };
-  const TodoDelete = () => { onClickDelete(); close(); };
+  const open = () => {
+    getDetailsText(); setIsOpen(true);
+  };
+
+  const close = () => {
+    setNewDetails(); setIsOpen(false);
+  };
+
+  const TodoComplete = () => {
+    onClickComplete(); setIsOpen(false);
+  };
+
+  const TodoDelete = () => {
+    onClickDelete(); setIsOpen(false);
+  };
 
   let modal;
   if (isOpen) {
@@ -17,9 +34,14 @@ export const Todo = (props) => {
         <div className='todo-modal'>
           <p>{title}</p>
           <p>details</p>
-          <textarea className='details' value={detailsText} onChange={onChangeDetailsText} />
+          <textarea className='details'
+            value={detailsText}
+            onChange={onChangeDetailsText} />
           <p>deadline</p>
-          <input className='deadline' type='date' />
+          <input className='deadline'
+            type='date'
+            value={deadlineDate}
+            onChange={onChangeDeadlineDate} />
           <button onClick={TodoComplete}>complete</button>
           <button onClick={TodoDelete}>delete</button>
           <button onClick={close}>close</button>

@@ -15,57 +15,80 @@ export const App = () => {
     { title: 'todo5', details: 'details5', completionDate: '2020-12-5' }
   ]);
 
-  // TODO追加
+  // #TODO関連
   const [todoText, setTodoText] = useState('');
   const onChangeTodoText = (e) => setTodoText(e.target.value);
+
+  // ##TODO追加
   const onSubmitAdd = (e) => {
     e.preventDefault();
     if (todoText === '') return;
-    const newTodo = [...incompleteTodo, { title: todoText }];
+    const newTodo = [...incompleteTodo, { title: todoText, details: '' }];
     setIncompleteTodo(newTodo);
     setTodoText('');
   };
 
-  // TODO削除
-  const onClickDelete = (index) => {
+  // ##TODO削除
+  const onClickDelete = (i) => {
     const newTodo = [...incompleteTodo];
-    newTodo.splice(index, 1);
+    newTodo.splice(i, 1);
     setIncompleteTodo(newTodo);
   };
 
-  // TODO完了
-  const onClickComplete = (index) => {
+  // ##TODO完了
+  const onClickComplete = (i) => {
     const now = new Date();
     const getCompletionDate = () => {
       const year = now.getFullYear();
       const month = now.getMonth() + 1;
       const date = now.getDate();
       const today = `${year}-${month}-${date}`;
-      incompleteTodo[index].completionDate = today;
+      incompleteTodo[i].completionDate = today;
     };
     getCompletionDate();
 
     const newIncompleteTodo = [...incompleteTodo];
-    newIncompleteTodo.splice(index, 1);
-    const newCompleteTodo = [...completeTodo, incompleteTodo[index]];
+    newIncompleteTodo.splice(i, 1);
+    const newCompleteTodo = [...completeTodo, incompleteTodo[i]];
     setIncompleteTodo(newIncompleteTodo);
     setCompleteTodo(newCompleteTodo);
   };
 
-  // TODOの説明関連
+  // #説明関連
   const [detailsText, setDetailsText] = useState('');
   const onChangeDetailsText = (e) => setDetailsText(e.target.value);
 
-  // DONE戻す
-  const onClickReturn = (index) => {
-    console.log(completeTodo[index]);
+  // ##説明文の取得
+  const getDetailsText = (i) => {
+    if (incompleteTodo[i].detailsText === '') {
+      setDetailsText('');
+    } else {
+      setDetailsText(incompleteTodo[i].details)
+    }
+  };
+
+  // ##説明文の更新
+  const setNewDetails = (i) => {
+    incompleteTodo[i].details = detailsText;
+    const newDetails = [...incompleteTodo];
+    setIncompleteTodo(newDetails);
+    setDetailsText('');
+  };
+
+  // #締め切り関連
+  const [deadlineDate, setDeadlineDate] = useState('');
+  const onChangeDeadlineDate = (e) => setDeadlineDate(e.target.value);
+
+  // #DONE関連
+  // ##DONE戻す
+  const onClickReturn = (i) => {
     const newCompleteTodo = [...completeTodo];
-    newCompleteTodo.splice(index, 1);
+    newCompleteTodo.splice(i, 1);
     setCompleteTodo(newCompleteTodo);
 
-    const newTodo = [...incompleteTodo, completeTodo[index]];
+    const newTodo = [...incompleteTodo, completeTodo[i]];
     setIncompleteTodo(newTodo);
-  }
+  };
 
   return (
     <>
@@ -92,17 +115,21 @@ export const App = () => {
 
           {/* todo */}
           <div className='todo'>
-            {incompleteTodo.map((todo, index) => {
+            {incompleteTodo.map((todo, i) => {
               return (
-                <div key={index}>
+                <div key={i}>
                   <Todo
                     title={todo.title}
                     details={todo.details}
                     deadline={todo.deadline}
                     detailsText={detailsText}
+                    deadlineDate={deadlineDate}
                     onChangeDetailsText={onChangeDetailsText}
-                    onClickDelete={() => onClickDelete(index)}
-                    onClickComplete={() => onClickComplete(index)}
+                    onChangeDeadlineDate={onChangeDeadlineDate}
+                    onClickDelete={() => onClickDelete(i)}
+                    onClickComplete={() => onClickComplete(i)}
+                    setNewDetails={() => setNewDetails(i)}
+                    getDetailsText={() => getDetailsText(i)}
                   />
                 </div>
               );
@@ -115,13 +142,13 @@ export const App = () => {
           <div className='done'>
             <p>done</p>
             <div className='space'></div>
-            {completeTodo.map((todo, index) => {
+            {completeTodo.map((todo, i) => {
               return (
-                <Done key={index}
+                <Done key={i}
                   title={todo.title}
                   details={todo.details}
                   completionDate={todo.completionDate}
-                  onClickReturn={()=>onClickReturn(index)}
+                  onClickReturn={() => onClickReturn(i)}
                 />
               );
             })}
