@@ -15,6 +15,8 @@ export const App = () => {
     { title: 'todo5', details: 'details5', completionDate: '2020-12-5' }
   ]);
 
+  // 時間の取得
+
   // #TODO関連
   const [todoText, setTodoText] = useState('');
   const onChangeTodoText = (e) => setTodoText(e.target.value);

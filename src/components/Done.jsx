@@ -17,7 +17,6 @@ export const Done = (props) => {
           <p>details</p>
           <p className='details'>{details}</p>
           <p>Completion Date</p>
-          <p className='deadline' />
           <p>{completionDate}</p>
           <button onClick={onClickReturn}>return</button>
           <button onClick={close}>close</button>
@@ -31,7 +30,7 @@ export const Done = (props) => {
       <ul className='box' onClick={open}>
         <li>{title}</li>
         <li>{details}</li>
-        <li>{completionDate}</li>
+        <li className='date'>{completionDate}</li>
       </ul>
       {modal}
     </>

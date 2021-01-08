@@ -6,14 +6,14 @@ export const Todo = (props) => {
     title, details, deadline,
     detailsText, deadlineDate,
     onChangeDetailsText, onChangeDeadlineDate,
-    onClickDelete, onClickComplete, 
+    onClickDelete, onClickComplete,
     setNewDetails, setNewDeadline,
     getDetailsText, getDeadlineDate
   } = props;
 
   const [isOpen, setIsOpen] = useState(false);
   const open = () => {
-    getDetailsText(); 
+    getDetailsText();
     getDeadlineDate();
     setIsOpen(true);
   };
@@ -56,14 +56,28 @@ export const Todo = (props) => {
   }
 
 
+  let style;
+  const today = deadline;
+  switch (true) {
+    case today === deadline:
+      style = {backgroundColor: 'rgba(255, 0, 0, 0.355)'} 
+      break;
+    // case today > deadline:
+    //   // style = 赤
+    //   break;
+    // default:
+    //   // style = 緑
+  }
+
+
   return (
-    <div className='box'>
-      <ul onClick={open}>
+    <>
+      <ul style={style} className='box' onClick={open}>
         <li>{title}</li>
         <li>{details}</li>
-        <li>{deadline}</li>
+        <li className='date'>{deadline}</li>
       </ul>
       {modal}
-    </div>
+    </>
   );
 }
