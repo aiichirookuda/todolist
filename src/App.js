@@ -7,15 +7,20 @@ export const App = () => {
   const [category, /*setCategory*/] = useState(['work', 'private']);
   const [incompleteTodo, setIncompleteTodo] = useState([
     { title: 'todo1', details: 'details1', deadline: '2020-11-10' },
-    { title: 'todo2', details: 'details2', deadline: '2020-11-25' },
-    { title: 'todo3', details: 'details3', deadline: '2020-11-25' }
+    { title: 'todo2', details: 'details2', deadline: '2021-01-12' },
+    { title: 'todo3', details: 'details3', deadline: '2021-03-25' }
   ]);
   const [completeTodo, setCompleteTodo] = useState([
-    { title: 'todo4', details: 'details4', completionDate: '2020-12-1' },
-    { title: 'todo5', details: 'details5', completionDate: '2020-12-5' }
+    { title: 'todo4', details: 'details4', completionDate: '2020-12-01' },
+    { title: 'todo5', details: 'details5', completionDate: '2020-12-05' }
   ]);
 
   // 時間の取得
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = ('0' + (now.getMonth() + 1)).slice(-2);
+  const date = ('0' + (now.getDate())).slice(-2);
+  const today = `${year}-${month}-${date}`;
 
   // #TODO関連
   const [todoText, setTodoText] = useState('');
@@ -39,15 +44,7 @@ export const App = () => {
 
   // ##TODO完了
   const onClickComplete = (i) => {
-    const now = new Date();
-    const getCompletionDate = () => {
-      const year = now.getFullYear();
-      const month = now.getMonth() + 1;
-      const date = now.getDate();
-      const today = `${year}-${month}-${date}`;
-      incompleteTodo[i].completionDate = today;
-    };
-    getCompletionDate();
+    incompleteTodo[i].completionDate = today;
 
     const newIncompleteTodo = [...incompleteTodo];
     newIncompleteTodo.splice(i, 1);
@@ -90,7 +87,7 @@ export const App = () => {
   };
 
   // ##締め切り日の更新
-  const setNewDeadline =(i)=>{
+  const setNewDeadline = (i) => {
     incompleteTodo[i].deadline = deadlineDate;
     const newDeadline = [...incompleteTodo];
     setIncompleteTodo(newDeadline);
@@ -106,6 +103,8 @@ export const App = () => {
     const newTodo = [...incompleteTodo, completeTodo[i]];
     setIncompleteTodo(newTodo);
   };
+
+  console.log('今日:' + today);
 
   return (
     <>
@@ -146,9 +145,10 @@ export const App = () => {
                     onClickDelete={() => onClickDelete(i)}
                     onClickComplete={() => onClickComplete(i)}
                     setNewDetails={() => setNewDetails(i)}
-                    setNewDeadline={()=> setNewDeadline(i)}
+                    setNewDeadline={() => setNewDeadline(i)}
                     getDetailsText={() => getDetailsText(i)}
                     getDeadlineDate={() => getDeadlineDate(i)}
+                    today={today}
                   />
                 </div>
               );

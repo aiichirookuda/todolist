@@ -8,7 +8,8 @@ export const Todo = (props) => {
     onChangeDetailsText, onChangeDeadlineDate,
     onClickDelete, onClickComplete,
     setNewDetails, setNewDeadline,
-    getDetailsText, getDeadlineDate
+    getDetailsText, getDeadlineDate,
+    today
   } = props;
 
   const [isOpen, setIsOpen] = useState(false);
@@ -55,20 +56,24 @@ export const Todo = (props) => {
       </>
   }
 
-
   let style;
-  const today = deadline;
   switch (true) {
-    case today === deadline:
-      style = {backgroundColor: 'rgba(255, 0, 0, 0.355)'} 
+    case deadline === '':
+      // 緑
+      style = { backgroundColor: ' rgba(0, 128 ,0 ,0.300)' }
       break;
-    // case today > deadline:
-    //   // style = 赤
-    //   break;
-    // default:
-    //   // style = 緑
+    case deadline === today:
+      // 黄
+      style = { backgroundColor: 'rgba(255, 255, 0 ,0.355)' }
+      break;
+    case deadline < today:
+      // 赤
+      style = { backgroundColor: 'rgba(255 , 0 , 0, 0.355)' }
+      break;
+    default:
+      // 緑
+      style = { backgroundColor: ' rgba(0, 128 ,0 ,0.300)' }
   }
-
 
   return (
     <>
