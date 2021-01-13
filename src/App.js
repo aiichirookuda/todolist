@@ -104,8 +104,6 @@ export const App = () => {
     setIncompleteTodo(newTodo);
   };
 
-  console.log('今日:' + today);
-
   return (
     <>
       {/* header */}
@@ -121,9 +119,10 @@ export const App = () => {
                 <p key={categoryName}>{categoryName}</p>
               );
             })}
-            <p>+</p>
+            <p>+</p>  
+            <button className='done-button'>done</button>
           </div>
-
+          
           {/* input */}
           <form onSubmit={onSubmitAdd}>
             <input className='input-todo' placeholder='Please add new TODO' value={todoText} onChange={onChangeTodoText} />

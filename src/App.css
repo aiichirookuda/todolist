@@ -1,26 +1,22 @@
 * {
-  padding: 0;
-  margin: 0;
+  padding   : 0;
+  margin    : 0;
   box-sizing: border-box;
   list-style: none;
+  color     : rgba(0, 0, 0, 0.747);
 }
 
 body {
-  margin: 0 15%;
-}
-
-.main-wrapper {
-  display: flex;
-  justify-content: space-between;
+  padding: 5px 2%;
 }
 
 .logo {
-  height: 40px;
+  height   : 40px;
   font-size: 24px;
 }
 
 .category {
-  display: flex;
+  display     : flex;
   padding-left: 5px;
 }
 
@@ -28,43 +24,31 @@ body {
   margin-right: 20px;
 }
 
+.done-button {
+  margin: 0 0 0 auto;
+  height: 25px;
+  border: none;
+  background-color: rgba(0, 0, 255, 0.355);
+}
+
 .input-todo {
-  height: 40px;
-  width: 100%;
+  height    : 40px;
+  width     : 100%;
   margin-top: 10px;
 }
 
 .box {
-  width: 100%;
-  height: 100px;
+  width     : 100%;
+  height    : 100px;
   margin-top: 10px;
-  padding: 3px 5px;
-  position: relative;
-}
-
-/* .todo .box {
-  background-color:rgba(255, 255, 0, 0.253);
-} */
-
-
-.left-container {
-  width: 65%;
-  padding-right: 20px;
+  padding   : 3px 5px;
+  position  : relative;
 }
 
 .date {
   position: absolute;
-  right: 5px;
-  bottom: 3px;
-}
-
-.right-container {
-  width: 30%;
-  padding-left: 20px;
-}
-
-.space {
-  height: 50px;
+  right   : 5px;
+  bottom  : 3px;
 }
 
 .done .box {
@@ -73,32 +57,32 @@ body {
 
 /* modal ここから*/
 .todo-modal {
-  width: 40%;
-  height: 280px;
-  padding: 10px;
+  width           : 40%;
+  height          : 280px;
+  padding         : 10px;
   background-color: white;
-  border-radius: 20px;
-  position: fixed;
-  top: 35%;
-  left: 17%;
-  z-index: 10;
+  border-radius   : 20px;
+  position        : fixed;
+  top             : 35%;
+  left            : 17%;
+  z-index         : 10;
 }
 
 .done-modal {
-  width: 40%;
-  height: 280px;
-  padding: 10px;
+  width           : 40%;
+  height          : 280px;
+  padding         : 10px;
   background-color: white;
-  border-radius: 20px;
-  position: fixed;
-  top: 35%;
-  right: 17%;
-  z-index: 10;
+  border-radius   : 20px;
+  position        : fixed;
+  top             : 35%;
+  right           : 17%;
+  z-index         : 10;
 }
 
 .details {
-  width: 100%;
-  height:100px;
+  width : 100%;
+  height: 100px;
 }
 
 .deadline {
@@ -106,18 +90,55 @@ body {
 }
 
 button {
-  height: 30px;
-  margin: 15px;
+  height        : 30px;
+  margin        : 15px;
   flex-direction: row;
 }
 
-.background{
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  min-height: 100vh;
+.background {
+  position        : fixed;
+  top             : 0px;
+  left            : 0px;
+  width           : 100%;
+  min-height      : 100vh;
   background-color: rgba(0, 0, 0, 0.466);
-  z-index: 5;
+  z-index         : 5;
 }
+
 /* modal ここまで */
+
+@media(max-width:749px) {
+  .done {
+    display: none;
+  }
+}
+
+@media (min-width:750px) {
+  body {
+    margin : auto;
+    padding: 20px 10%;
+  }
+
+  .main-wrapper {
+    display: flex;
+  }
+
+  .left-container {
+    width        : 60%;
+    padding-right: 20px;
+  }
+
+  .done-button {
+    display: none;
+  }
+
+  .space {
+    height: 50px;
+  }
+
+  .right-container {
+    width       : 40%;
+    padding-left: 20px;
+  }
+
+}
