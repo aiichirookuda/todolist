@@ -25,9 +25,8 @@ body {
 }
 
 .done-button {
-  margin: 0 0 0 auto;
-  height: 25px;
-  border: none;
+  margin          : 0 0 0 auto;
+  border          : none;
   background-color: rgba(0, 0, 255, 0.355);
 }
 
@@ -55,34 +54,30 @@ body {
   background-color: rgba(0, 0, 255, 0.355);
 }
 
-/* modal ここから*/
-.todo-modal {
-  width           : 40%;
-  height          : 280px;
-  padding         : 10px;
-  background-color: white;
-  border-radius   : 20px;
-  position        : fixed;
-  top             : 35%;
-  left            : 17%;
-  z-index         : 10;
+#label1 {
+  display: none;
 }
 
-.done-modal {
-  width           : 40%;
-  height          : 280px;
+/* modal ここから*/
+.modal {
+  width           : 96%;
+  height          : 350px;
   padding         : 10px;
   background-color: white;
   border-radius   : 20px;
   position        : fixed;
-  top             : 35%;
-  right           : 17%;
+  top             : 0;
+  right           : 0;
+  bottom          : 0;
+  left            : 0;
+  margin          : auto;
   z-index         : 10;
 }
 
 .details {
+  resize: none;
   width : 100%;
-  height: 100px;
+  height: 180px;
 }
 
 .deadline {
@@ -111,6 +106,16 @@ button {
   .done {
     display: none;
   }
+
+  .test {
+    display: none;
+  }
+
+  #label1:checked+.done {
+    display: block;
+    padding: 10px;
+  }
+  
 }
 
 @media (min-width:750px) {
@@ -123,17 +128,13 @@ button {
     display: flex;
   }
 
-  .left-container {
-    width        : 60%;
-    padding-right: 20px;
-  }
-
   .done-button {
     display: none;
   }
 
-  .space {
-    height: 50px;
+  .left-container {
+    width        : 60%;
+    padding-right: 20px;
   }
 
   .right-container {
@@ -141,4 +142,11 @@ button {
     padding-left: 20px;
   }
 
+  .space {
+    height: 50px;
+  }
+
+  .modal {
+    width: 70%;
+  }
 }

@@ -12,7 +12,7 @@ export const Done = (props) => {
   if (isOpen) {
     modal =
       <>
-        <div className='done-modal'>
+        <div className='modal'>
           <p>{title}</p>
           <p>details</p>
           <p className='details'>{details}</p>

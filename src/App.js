@@ -119,10 +119,10 @@ export const App = () => {
                 <p key={categoryName}>{categoryName}</p>
               );
             })}
-            <p>+</p>  
-            <button className='done-button'>done</button>
+            <p>+</p>
+            <label for='label1' className='done-button'>done</label>
           </div>
-          
+
           {/* input */}
           <form onSubmit={onSubmitAdd}>
             <input className='input-todo' placeholder='Please add new TODO' value={todoText} onChange={onChangeTodoText} />
@@ -132,24 +132,22 @@ export const App = () => {
           <div className='todo'>
             {incompleteTodo.map((todo, i) => {
               return (
-                <div key={i}>
-                  <Todo
-                    title={todo.title}
-                    details={todo.details}
-                    deadline={todo.deadline}
-                    detailsText={detailsText}
-                    deadlineDate={deadlineDate}
-                    onChangeDetailsText={onChangeDetailsText}
-                    onChangeDeadlineDate={onChangeDeadlineDate}
-                    onClickDelete={() => onClickDelete(i)}
-                    onClickComplete={() => onClickComplete(i)}
-                    setNewDetails={() => setNewDetails(i)}
-                    setNewDeadline={() => setNewDeadline(i)}
-                    getDetailsText={() => getDetailsText(i)}
-                    getDeadlineDate={() => getDeadlineDate(i)}
-                    today={today}
-                  />
-                </div>
+                <Todo key={i}
+                  title={todo.title}
+                  details={todo.details}
+                  deadline={todo.deadline}
+                  detailsText={detailsText}
+                  deadlineDate={deadlineDate}
+                  onChangeDetailsText={onChangeDetailsText}
+                  onChangeDeadlineDate={onChangeDeadlineDate}
+                  onClickDelete={() => onClickDelete(i)}
+                  onClickComplete={() => onClickComplete(i)}
+                  setNewDetails={() => setNewDetails(i)}
+                  setNewDeadline={() => setNewDeadline(i)}
+                  getDetailsText={() => getDetailsText(i)}
+                  getDeadlineDate={() => getDeadlineDate(i)}
+                  today={today}
+                />
               );
             })}
           </div>
@@ -157,6 +155,7 @@ export const App = () => {
 
         <div className='right-container'>
           {/* done */}
+          <input id='label1' type='checkbox'></input>
           <div className='done'>
             <p>done</p>
             <div className='space'></div>

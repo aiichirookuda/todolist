@@ -37,7 +37,7 @@ export const Todo = (props) => {
   if (isOpen) {
     modal =
       <>
-        <div className='todo-modal'>
+        <div className='modal'>
           <p>{title}</p>
           <p>details</p>
           <textarea className='details'
