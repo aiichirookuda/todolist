@@ -120,7 +120,7 @@ export const App = () => {
               );
             })}
             <p>+</p>
-            <label for='label1' className='done-button'>done</label>
+            <label htmlFor='label1' className='done-button'>done</label>
           </div>
 
           {/* input */}

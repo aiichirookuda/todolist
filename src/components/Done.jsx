@@ -27,11 +27,11 @@ export const Done = (props) => {
 
   return (
     <>
-      <ul className='box' onClick={open}>
-        <li>{title}</li>
-        <li>{details}</li>
-        <li className='date'>{completionDate}</li>
-      </ul>
+        <ul className='box' onClick={open}>
+          <li>{title}</li>
+          <li>{details}</li>
+          <li className='date'>{completionDate}</li>
+        </ul>
       {modal}
     </>
   );
