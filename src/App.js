@@ -104,8 +104,22 @@ export const App = () => {
     setIncompleteTodo(newTodo);
   };
 
+  const allChecked = () => {
+    if (document.getElementById('todoCheck').checked) {
+      document.getElementById('todoCheck').checked = false;
+    } else {
+      document.getElementById('todoCheck').checked = true;
+    }
+
+    if (document.getElementById('doneCheck').checked) {
+      document.getElementById('doneCheck').checked = false;
+    } else {
+      document.getElementById('doneCheck').checked = true;
+    }
+  }
+
   return (
-    <>
+    <div className='wrapper show'>
       {/* header */}
       <div className='logo'>Logo</div>
 
@@ -120,7 +134,7 @@ export const App = () => {
               );
             })}
             <p>+</p>
-            <label htmlFor='label1' className='done-button'>done</label>
+            <label className='done-button' onClick={allChecked}>done</label>
           </div>
 
           {/* input */}
@@ -129,7 +143,9 @@ export const App = () => {
           </form>
 
           {/* todo */}
+          <input type='checkBox' id='todoCheck'></input>
           <div className='todo'>
+            <p>todo</p>
             {incompleteTodo.map((todo, i) => {
               return (
                 <Todo key={i}
@@ -155,10 +171,10 @@ export const App = () => {
 
         <div className='right-container'>
           {/* done */}
-          <input id='label1' type='checkbox'></input>
+          <input type='checkBox' id='doneCheck'></input>
           <div className='done'>
-            <p>done</p>
             <div className='space'></div>
+            <p>done</p>
             {completeTodo.map((todo, i) => {
               return (
                 <Done key={i}
@@ -172,6 +188,6 @@ export const App = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
