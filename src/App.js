@@ -104,17 +104,20 @@ export const App = () => {
     setIncompleteTodo(newTodo);
   };
 
+  // スマホ画面時の切替ボタン
+  const [toggle, setToggle] = useState(
+    <span className='blue'>done</span>
+  );
+
   const allChecked = () => {
     if (document.getElementById('todoCheck').checked) {
       document.getElementById('todoCheck').checked = false;
+      document.getElementById('doneCheck').checked = false;
+      setToggle(<span className='blue'>done</span>);
     } else {
       document.getElementById('todoCheck').checked = true;
-    }
-
-    if (document.getElementById('doneCheck').checked) {
-      document.getElementById('doneCheck').checked = false;
-    } else {
       document.getElementById('doneCheck').checked = true;
+      setToggle(<span className='green'>todo</span>);
     }
   }
 
@@ -134,7 +137,7 @@ export const App = () => {
               );
             })}
             <p>+</p>
-            <label className='done-button' onClick={allChecked}>done</label>
+            <label className='done-button' onClick={allChecked}>{toggle}</label>
           </div>
 
           {/* input */}
