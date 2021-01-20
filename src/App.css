@@ -16,7 +16,7 @@
 }
 
 .category {
-  display     : flex;
+  display: flex;
 }
 
 .category p {
@@ -80,8 +80,12 @@
 
 button {
   height        : 30px;
+  width         : 65px;
   margin        : 15px;
   flex-direction: row;
+  border-radius : 15px;
+  border: none;
+  cursor: pointer;
 }
 
 .background {
@@ -103,22 +107,22 @@ button {
   }
 
   .done-button {
-    margin          : 0 0 0 auto;
-    height: 25px;
-    width: 60px;
+    margin    : 0 0 0 auto;
+    height    : 25px;
+    width     : 60px;
     text-align: center;
   }
-  
-  .blue{
+
+  .blue {
     background-color: rgba(0, 0, 255, 0.355);
-    display: block;
-    border-radius: 14px;
+    display         : block;
+    border-radius   : 14px;
   }
 
-  .green{
-    background-color: rgba(0, 128 ,0 ,0.300);
-    display: block;
-    border-radius: 14px;
+  .green {
+    background-color: rgba(0, 128, 0, 0.300);
+    display         : block;
+    border-radius   : 14px;
   }
 
   #doneCheck:checked+.done {
@@ -157,7 +161,7 @@ button {
   }
 
   .space {
-    height: 76px;
+    height: 52px;
   }
 
   .modal {

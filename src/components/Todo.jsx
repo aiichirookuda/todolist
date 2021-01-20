@@ -56,7 +56,6 @@ export const Todo = (props) => {
       </>
   }
 
-  // 色分け
   let style;
   switch (true) {
     case deadline === '':

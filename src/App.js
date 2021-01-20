@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import './App.css';
+import { Category } from './components/Category';
+import { Input } from './components/Input';
 import { Todo } from './components/Todo';
 import { Done } from './components/Done';
 
 export const App = () => {
-  const [category, /*setCategory*/] = useState(['work', 'private']);
   const [incompleteTodo, setIncompleteTodo] = useState([
     { title: 'todo1', details: 'details1', deadline: '2020-11-10' },
     { title: 'todo2', details: 'details2', deadline: '2021-01-12' },
@@ -104,11 +105,12 @@ export const App = () => {
     setIncompleteTodo(newTodo);
   };
 
-  // スマホ画面時の切替ボタン
+  // #スマホ画面時の切替ボタン
   const [toggle, setToggle] = useState(
     <span className='blue'>done</span>
   );
 
+  
   const allChecked = () => {
     if (document.getElementById('todoCheck').checked) {
       document.getElementById('todoCheck').checked = false;
@@ -124,26 +126,22 @@ export const App = () => {
   return (
     <div className='wrapper show'>
       {/* header */}
-      <div className='logo'>Logo</div>
+      <div className='logo'>TodoNote</div>
+
+      {/* category */}
+      <Category
+        allChecked={allChecked}
+        toggle={toggle}
+      />
 
       <div className='main-wrapper'>
         <div className='left-container'>
-
-          {/* category */}
-          <div className='category'>
-            {category.map((categoryName) => {
-              return (
-                <p key={categoryName}>{categoryName}</p>
-              );
-            })}
-            <p>+</p>
-            <label className='done-button' onClick={allChecked}>{toggle}</label>
-          </div>
-
           {/* input */}
-          <form onSubmit={onSubmitAdd}>
-            <input className='input-todo' placeholder='Please add new TODO' value={todoText} onChange={onChangeTodoText} />
-          </form>
+          <Input
+            onSubmitAdd={onSubmitAdd}
+            todoText={todoText}
+            onChangeTodoText={onChangeTodoText}
+          />
 
           {/* todo */}
           <input type='checkBox' id='todoCheck'></input>
