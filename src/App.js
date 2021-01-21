@@ -6,11 +6,13 @@ import { Todo } from './components/Todo';
 import { Done } from './components/Done';
 
 export const App = () => {
+  // todo
   const [incompleteTodo, setIncompleteTodo] = useState([
     { title: 'todo1', details: 'details1', deadline: '2020-11-10' },
     { title: 'todo2', details: 'details2', deadline: '2021-01-12' },
     { title: 'todo3', details: 'details3', deadline: '2021-03-25' }
   ]);
+  // done
   const [completeTodo, setCompleteTodo] = useState([
     { title: 'todo4', details: 'details4', completionDate: '2020-12-01' },
     { title: 'todo5', details: 'details5', completionDate: '2020-12-05' }
@@ -105,12 +107,11 @@ export const App = () => {
     setIncompleteTodo(newTodo);
   };
 
-  // #スマホ画面時の切替ボタン
+  // #スマホ画面時のtodo⇄done切替ボタン
   const [toggle, setToggle] = useState(
     <span className='blue'>done</span>
   );
 
-  
   const allChecked = () => {
     if (document.getElementById('todoCheck').checked) {
       document.getElementById('todoCheck').checked = false;
@@ -126,7 +127,7 @@ export const App = () => {
   return (
     <div className='wrapper show'>
       {/* header */}
-      <div className='logo'>TodoNote</div>
+      <div className='logo'>TodoList</div>
 
       {/* category */}
       <Category
