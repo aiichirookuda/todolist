@@ -6,6 +6,10 @@
   color     : rgba(0, 0, 0, 0.747);
 }
 
+body {
+  font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+}
+
 .wrapper {
   padding: 5px 2%;
 }
@@ -75,17 +79,19 @@
 }
 
 .deadline {
-  width: 100%;
+  display: block;
+  width  : 100%;
 }
 
 button {
-  height        : 30px;
-  width         : 65px;
-  margin        : 15px;
-  flex-direction: row;
-  border-radius : 15px;
-  border: none;
-  cursor: pointer;
+  height          : 30px;
+  width           : 65px;
+  margin          : 15px;
+  background-color: gainsboro;
+  flex-direction  : row;
+  border-radius   : 15px;
+  border          : none;
+  cursor          : pointer;
 }
 
 .background {
@@ -108,21 +114,23 @@ button {
 
   .done-button {
     margin    : 0 0 0 auto;
-    height    : 25px;
-    width     : 60px;
     text-align: center;
   }
 
   .blue {
     background-color: rgba(0, 0, 255, 0.355);
-    display         : block;
-    border-radius   : 14px;
   }
 
   .green {
     background-color: rgba(0, 128, 0, 0.300);
-    display         : block;
-    border-radius   : 14px;
+  }
+
+  .blue,
+  .green {
+    display      : block;
+    border-radius: 15px;
+    line-height  : 30px;
+    width        : 60px;
   }
 
   #doneCheck:checked+.done {
