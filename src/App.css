@@ -3,7 +3,7 @@
   margin    : 0;
   box-sizing: border-box;
   list-style: none;
-  color     : rgba(0, 0, 0, 0.747);
+  color     : rgba(0, 0, 0, 0.671);
 }
 
 body {
@@ -42,9 +42,10 @@ body {
 }
 
 .date {
-  position: absolute;
-  right   : 5px;
-  bottom  : 3px;
+  position : absolute;
+  right    : 5px;
+  bottom   : 3px;
+  font-size: 15px;
 }
 
 .done .box {
