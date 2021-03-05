@@ -75,12 +75,19 @@ export const Todo = (props) => {
       style = { backgroundColor: ' rgba(0, 128 ,0 ,0.300)' }
   }
 
+  let icon;
+  if (deadline !== '') {
+    icon = <i class="far fa-calendar-alt"></i>
+  }
+
   return (
     <>
       <ul style={style} className='box' onClick={open}>
         <li>{title}</li>
         <li>{details}</li>
-        <li className='date'>{deadline}</li>
+        <li className='date'>
+          {icon} {deadline}
+        </li>
       </ul>
       {modal}
     </>
