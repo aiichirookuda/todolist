@@ -8,21 +8,21 @@ import { Done } from './components/Done';
 export const App = () => {
   // todo
   const [incompleteTodo, setIncompleteTodo] = useState([
-    { title: 'todo1', details: 'details1', deadline: '2020-11-10' },
-    { title: 'todo2', details: 'details2', deadline: '2021-01-12' },
-    { title: 'todo3', details: 'details3', deadline: '2021-03-25' }
+    { title: 'todo1', details: 'details1', deadline: '2020-9-20' },
+    { title: 'todo2', details: 'details2', deadline: '2021-09-21' },
+    { title: 'todo3', details: 'details3', deadline: '2021-10-30' },
   ]);
   // done
   const [completeTodo, setCompleteTodo] = useState([
     { title: 'todo4', details: 'details4', completionDate: '2020-12-01' },
-    { title: 'todo5', details: 'details5', completionDate: '2020-12-05' }
+    { title: 'todo5', details: 'details5', completionDate: '2020-12-05' },
   ]);
 
   // 時間の取得
   const now = new Date();
   const year = now.getFullYear();
   const month = ('0' + (now.getMonth() + 1)).slice(-2);
-  const date = ('0' + (now.getDate())).slice(-2);
+  const date = ('0' + now.getDate()).slice(-2);
   const today = `${year}-${month}-${date}`;
 
   // #TODO関連
@@ -33,7 +33,10 @@ export const App = () => {
   const onSubmitAdd = (e) => {
     e.preventDefault();
     if (todoText === '') return;
-    const newTodo = [...incompleteTodo, { title: todoText, details: '', deadline: '' }];
+    const newTodo = [
+      ...incompleteTodo,
+      { title: todoText, details: '', deadline: '' },
+    ];
     setIncompleteTodo(newTodo);
     setTodoText('');
   };
@@ -65,7 +68,7 @@ export const App = () => {
     if (incompleteTodo[i].detailsText === '') {
       setDetailsText('');
     } else {
-      setDetailsText(incompleteTodo[i].details)
+      setDetailsText(incompleteTodo[i].details);
     }
   };
 
@@ -108,35 +111,30 @@ export const App = () => {
   };
 
   // #スマホ画面時のtodo⇄done切替ボタン
-  const [toggle, setToggle] = useState(
-    <span className='blue'>done</span>
-  );
+  const [toggle, setToggle] = useState(<span className="blue">done</span>);
 
   const allChecked = () => {
     if (document.getElementById('todoCheck').checked) {
       document.getElementById('todoCheck').checked = false;
       document.getElementById('doneCheck').checked = false;
-      setToggle(<span className='blue'>done</span>);
+      setToggle(<span className="blue">done</span>);
     } else {
       document.getElementById('todoCheck').checked = true;
       document.getElementById('doneCheck').checked = true;
-      setToggle(<span className='green'>todo</span>);
+      setToggle(<span className="green">todo</span>);
     }
-  }
+  };
 
   return (
-    <div className='wrapper show'>
+    <div className="wrapper show">
       {/* header */}
-      <div className='logo'>TodoList</div>
+      <div className="logo">TodoList</div>
 
       {/* category */}
-      <Category
-        allChecked={allChecked}
-        toggle={toggle}
-      />
+      <Category allChecked={allChecked} toggle={toggle} />
 
-      <div className='main-wrapper'>
-        <div className='left-container'>
+      <div className="main-wrapper">
+        <div className="left-container">
           {/* input */}
           <Input
             onSubmitAdd={onSubmitAdd}
@@ -145,12 +143,13 @@ export const App = () => {
           />
 
           {/* todo */}
-          <input type='checkBox' id='todoCheck'></input>
-          <div className='todo'>
+          <input type="checkBox" id="todoCheck"></input>
+          <div className="todo">
             <p>todo</p>
             {incompleteTodo.map((todo, i) => {
               return (
-                <Todo key={i}
+                <Todo
+                  key={i}
                   title={todo.title}
                   details={todo.details}
                   deadline={todo.deadline}
@@ -171,15 +170,16 @@ export const App = () => {
           </div>
         </div>
 
-        <div className='right-container'>
+        <div className="right-container">
           {/* done */}
-          <input type='checkBox' id='doneCheck'></input>
-          <div className='done'>
-            <div className='space'></div>
+          <input type="checkBox" id="doneCheck"></input>
+          <div className="done">
+            <div className="space"></div>
             <p>done</p>
             {completeTodo.map((todo, i) => {
               return (
-                <Done key={i}
+                <Done
+                  key={i}
                   title={todo.title}
                   details={todo.details}
                   completionDate={todo.completionDate}
@@ -192,4 +192,4 @@ export const App = () => {
       </div>
     </div>
   );
-}
+};
