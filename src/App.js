@@ -8,9 +8,9 @@ import { Done } from './components/Done';
 export const App = () => {
   // todo
   const [incompleteTodo, setIncompleteTodo] = useState([
-    { title: 'todo1', details: 'details1', deadline: '2020-9-20' },
-    { title: 'todo2', details: 'details2', deadline: '2021-09-21' },
-    { title: 'todo3', details: 'details3', deadline: '2021-10-30' },
+    { title: 'todo1', details: 'details1', deadline: '2021-10-10' },
+    { title: 'todo2', details: 'details2', deadline: '2021-11-30' },
+    { title: 'todo3', details: 'details3', deadline: '2022-10-30' },
   ]);
   // done
   const [completeTodo, setCompleteTodo] = useState([
